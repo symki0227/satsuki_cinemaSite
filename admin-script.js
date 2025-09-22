@@ -157,24 +157,10 @@ class WorkManager {
         }
 
         worksGrid.innerHTML = works.map(work => {
-            let thumbnailElement = '';
-            if (work.video && work.video.includes('youtube.com/embed/')) {
-                thumbnailElement = `
-                    <img src="${work.thumbnail}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                `;
-            } else if (work.video && work.video.includes('placeholder')) {
-                thumbnailElement = `
-                    <img src="${work.thumbnail}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                `;
-            } else {
-                thumbnailElement = `
-                    <video muted>
-                        <source src="${work.video}" type="video/mp4">
-                        <img src="${work.thumbnail}" alt="${work.title}">
-                    </video>
-                `;
-            }
-            
+            const thumbnailElement = `
+                <img src="${work.thumbnail || this.getYouTubeThumbnail(work.youtube || work.video)}" alt="${work.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            `;
+
             return `
                 <div class="work-card fade-in">
                     ${work.featured ? '<div class="work-featured">Slideshow</div>' : ''}
@@ -397,25 +383,16 @@ class WorkManager {
         const previewVideo = document.getElementById('preview-video');
         const previewInfo = document.getElementById('preview-info');
 
-        if (work.video.includes('youtube.com/embed/')) {
-            previewVideo.innerHTML = `
-                <iframe 
-                    width="100%" 
-                    height="315" 
-                    src="${work.video}" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            `;
-        } else {
-            previewVideo.innerHTML = `
-                <video controls>
-                    <source src="${work.video}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            `;
-        }
+        previewVideo.innerHTML = `
+            <iframe 
+                width="100%" 
+                height="315" 
+                src="${work.video}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        `;
 
         previewInfo.innerHTML = `
             <h3>${work.title}</h3>
