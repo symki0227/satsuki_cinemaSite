@@ -260,13 +260,14 @@ class WorkManager {
     handleFormSubmit() {
         const formData = new FormData(document.getElementById('work-form'));
         
+        const sanitizedYouTube = (formData.get('youtube') || '').toString().trim().replace(/^@+/, '');
         const workData = {
             title: formData.get('title'),
             year: parseInt(formData.get('year')),
             category: formData.get('category'),
             description: formData.get('description'),
             featured: formData.get('featured') === 'on',
-            youtube: formData.get('youtube')
+            youtube: sanitizedYouTube
         };
 
         // Validation
@@ -333,8 +334,12 @@ class WorkManager {
 
     // Validate YouTube URL
     isValidYouTubeUrl(url) {
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=[\w-]+(&[\w=&-]+)?)|youtu\.be\/[\w-]+(\?.*)?|youtube\.com\/embed\/[\w-]+(\?.*)?)$/;
-        return youtubeRegex.test(url);
+        if (!url) return false;
+        const sanitized = String(url).trim().replace(/^@+/, '');
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com\/(watch\?v=[\w-]{6,}|shorts\/[\w-]{6,}|embed\/[\w-]{6,})|youtu\.be\/[\w-]{6,})([\w\-\.?=&%]*)?$/;
+        if (youtubeRegex.test(sanitized)) return true;
+        // 素のIDだけでも許可（11文字想定）
+        return /^[A-Za-z0-9_-]{11}$/.test(sanitized);
     }
 
     // Convert YouTube URL to embed URL
