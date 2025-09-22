@@ -45,7 +45,9 @@ class WorkManager {
     loadWorks() {
         const saved = localStorage.getItem('portfolio-works');
         if (saved) {
-            return JSON.parse(saved);
+            // Normalize saved items to ensure YouTube URL only is enough
+            const parsed = JSON.parse(saved);
+            return parsed.map(w => this.normalizeWork(w));
         }
         // Default work data (using placeholder images)
         return [
@@ -138,6 +140,19 @@ class WorkManager {
                 poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work6'
             }
         ];
+    }
+
+    // Ensure work has embed/thumbnail derived from youtube field
+    normalizeWork(work) {
+        const cloned = { ...work };
+        if (cloned.youtube) {
+            const embed = this.getYouTubeEmbedUrl(cloned.youtube);
+            const thumb = this.getYouTubeThumbnail(cloned.youtube);
+            if (embed) cloned.video = embed;
+            if (!cloned.thumbnail) cloned.thumbnail = thumb;
+            if (!cloned.poster) cloned.poster = thumb;
+        }
+        return cloned;
     }
 
     // Render works
@@ -308,25 +323,25 @@ class WorkManager {
             // Edit
             const workIndex = this.works.findIndex(w => w.id === this.currentWorkId);
             if (workIndex !== -1) {
-                this.works[workIndex] = {
+                this.works[workIndex] = this.normalizeWork({
                     ...this.works[workIndex],
                     ...workData,
                     video: this.getYouTubeEmbedUrl(workData.youtube),
                     thumbnail: thumbnailFile ? this.handleFileUpload(thumbnailFile, 'thumbnail') : this.getYouTubeThumbnail(workData.youtube),
                     poster: posterFile ? this.handleFileUpload(posterFile, 'poster') : this.getYouTubeThumbnail(workData.youtube)
-                };
+                });
                 this.showNotification('Work updated successfully', 'success');
             }
         } else {
             // Add new
             const newId = Math.max(...this.works.map(w => w.id), 0) + 1;
-            this.works.push({
+            this.works.push(this.normalizeWork({
                 id: newId,
                 ...workData,
                 video: this.getYouTubeEmbedUrl(workData.youtube),
                 thumbnail: thumbnailFile ? this.handleFileUpload(thumbnailFile, 'thumbnail') : this.getYouTubeThumbnail(workData.youtube),
                 poster: posterFile ? this.handleFileUpload(posterFile, 'poster') : this.getYouTubeThumbnail(workData.youtube)
-            });
+            }));
             this.showNotification('Work added successfully', 'success');
         }
 
@@ -347,38 +362,46 @@ class WorkManager {
 
     // Validate YouTube URL
     isValidYouTubeUrl(url) {
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)[\w-]+/;
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=[\w-]+(&[\w=&-]+)?)|youtu\.be\/[\w-]+(\?.*)?|youtube\.com\/embed\/[\w-]+(\?.*)?)$/;
         return youtubeRegex.test(url);
     }
 
     // Convert YouTube URL to embed URL
     getYouTubeEmbedUrl(url) {
-        let videoId = '';
-        
-        if (url.includes('youtube.com/watch?v=')) {
-            videoId = url.split('v=')[1].split('&')[0];
-        } else if (url.includes('youtu.be/')) {
-            videoId = url.split('youtu.be/')[1].split('?')[0];
-        } else if (url.includes('youtube.com/embed/')) {
-            videoId = url.split('embed/')[1].split('?')[0];
-        }
-        
-        return `https://www.youtube.com/embed/${videoId}`;
+        try {
+            const u = new URL(url, location.origin);
+            // youtu.be/ID
+            if (u.hostname.includes('youtu.be')) {
+                const id = u.pathname.replace('/', '');
+                return `https://www.youtube.com/embed/${id}`;
+            }
+            // youtube.com/watch?v=ID
+            if (u.pathname === '/watch') {
+                const id = u.searchParams.get('v');
+                return id ? `https://www.youtube.com/embed/${id}` : '';
+            }
+            // youtube.com/shorts/ID
+            if (u.pathname.startsWith('/shorts/')) {
+                const id = u.pathname.split('/shorts/')[1].split('/')[0];
+                return id ? `https://www.youtube.com/embed/${id}` : '';
+            }
+            // already embed
+            if (u.pathname.startsWith('/embed/')) {
+                return `https://www.youtube.com${u.pathname}`;
+            }
+        } catch (_) {}
+        return '';
     }
 
     // Get YouTube thumbnail URL
     getYouTubeThumbnail(url) {
-        let videoId = '';
-        
-        if (url.includes('youtube.com/watch?v=')) {
-            videoId = url.split('v=')[1].split('&')[0];
-        } else if (url.includes('youtu.be/')) {
-            videoId = url.split('youtu.be/')[1].split('?')[0];
-        } else if (url.includes('youtube.com/embed/')) {
-            videoId = url.split('embed/')[1].split('?')[0];
+        try {
+            const embed = this.getYouTubeEmbedUrl(url);
+            const id = embed.split('/embed/')[1]?.split('?')[0];
+            return id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : '';
+        } catch (_) {
+            return '';
         }
-        
-        return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     }
 
     // Preview work
