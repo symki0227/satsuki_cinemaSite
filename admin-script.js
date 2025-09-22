@@ -49,96 +49,81 @@ class WorkManager {
             const parsed = JSON.parse(saved);
             return parsed.map(w => this.normalizeWork(w));
         }
-        // Default work data (using placeholder images)
+        // Default work data (no placeholder service; use YouTube samples)
         return [
             {
                 id: 1,
-                title: 'Work Title 1',
+                title: 'Sample 1',
                 year: 2024,
                 category: 'Short Film',
-                description: 'Work description goes here',
-                featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work1',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work1',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work1'
+                description: 'YouTube sample video',
+                featured: true,
+                youtube: 'https://youtu.be/dQw4w9WgXcQ',
+                video: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg'
             },
             {
                 id: 2,
-                title: 'Work Title 2',
+                title: 'Sample 2',
                 year: 2024,
                 category: 'Documentary',
-                description: 'Work description goes here',
-                featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work2',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work2',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work2'
+                description: 'YouTube sample video',
+                featured: true,
+                youtube: 'https://youtu.be/9bZkp7q19f0',
+                video: 'https://www.youtube.com/embed/9bZkp7q19f0',
+                thumbnail: 'https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg'
             },
             {
                 id: 3,
-                title: 'Work Title 3',
-                year: 2024,
+                title: 'Sample 3',
+                year: 2023,
                 category: 'Music Video',
-                description: 'Work description goes here',
+                description: 'YouTube sample video',
                 featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work3',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work3',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work3'
+                youtube: 'https://youtu.be/kJQP7kiw5Fk',
+                video: 'https://www.youtube.com/embed/kJQP7kiw5Fk',
+                thumbnail: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg'
             },
             {
                 id: 4,
-                title: 'Featured Work 1',
-                year: 2024,
+                title: 'Sample 4',
+                year: 2023,
                 category: 'Commercial',
-                description: 'This is a featured work for slideshow',
-                featured: true,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Featured1',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Featured1',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Featured1'
+                description: 'YouTube sample video',
+                featured: false,
+                youtube: 'https://youtu.be/ysz5S6PUM-U',
+                video: 'https://www.youtube.com/embed/ysz5S6PUM-U',
+                thumbnail: 'https://img.youtube.com/vi/ysz5S6PUM-U/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/ysz5S6PUM-U/hqdefault.jpg'
             },
             {
                 id: 5,
-                title: 'Featured Work 2',
-                year: 2024,
+                title: 'Sample 5',
+                year: 2023,
                 category: 'Animation',
-                description: 'This is another featured work for slideshow',
-                featured: true,
-                video: 'https://via.placeholder.com/800x450/4CAF50/ffffff?text=Featured2',
-                thumbnail: 'https://via.placeholder.com/400x300/4CAF50/ffffff?text=Featured2',
-                poster: 'https://via.placeholder.com/800x450/4CAF50/ffffff?text=Featured2'
+                description: 'YouTube sample video',
+                featured: false,
+                youtube: 'https://youtu.be/aqz-KE-bpKQ',
+                video: 'https://www.youtube.com/embed/aqz-KE-bpKQ',
+                thumbnail: 'https://img.youtube.com/vi/aqz-KE-bpKQ/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/aqz-KE-bpKQ/hqdefault.jpg'
             },
             {
                 id: 6,
-                title: 'Work Title 4',
-                year: 2023,
-                category: 'Commercial',
-                description: 'Work description goes here',
-                featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work4',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work4',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work4'
-            },
-            {
-                id: 7,
-                title: 'Work Title 5',
-                year: 2023,
-                category: 'Animation',
-                description: 'Work description goes here',
-                featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work5',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work5',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work5'
-            },
-            {
-                id: 8,
-                title: 'Work Title 6',
-                year: 2023,
+                title: 'Sample 6',
+                year: 2022,
                 category: 'Experimental',
-                description: 'Work description goes here',
+                description: 'YouTube sample video',
                 featured: false,
-                video: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work6',
-                thumbnail: 'https://via.placeholder.com/400x300/ff6b9d/ffffff?text=Work6',
-                poster: 'https://via.placeholder.com/800x450/ff6b9d/ffffff?text=Work6'
-            }
+                youtube: 'https://youtu.be/5qap5aO4i9A',
+                video: 'https://www.youtube.com/embed/5qap5aO4i9A',
+                thumbnail: 'https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg',
+                poster: 'https://img.youtube.com/vi/5qap5aO4i9A/hqdefault.jpg'
+            },
+            // fewer defaults; users add more via admin
         ];
     }
 
