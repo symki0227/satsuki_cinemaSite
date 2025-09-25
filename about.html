@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT - 小寺颯輝 | 映像作品ポートフォリオ</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans JP', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, sans-serif; color: #111; background: #fff; line-height: 1.8; }
+
+        /* Header */
+        .header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,.9); backdrop-filter: blur(10px); }
+        .nav { display: flex; align-items: center; width: 100%; padding: 10px 32px 10px 0; }
+        .nav-brand { display: flex; align-items: center; }
+        .nav-logo { height: 40px; width: auto; object-fit: contain; }
+        .nav-menu { margin-left: auto; display: flex; gap: 24px; list-style: none; }
+        .nav-link { color: #fff; text-decoration: none; font-weight: 800; }
+        .nav-link:hover { color: #e91e63; }
+
+        /* Page Title */
+        .hero { background: #111; color: #fff; padding: 72px 0; text-align: center; }
+        .page-title { font-size: 2.2rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+        .page-title::after { content: ''; display: block; width: 90px; height: 2px; margin: 14px auto 0; background: #fff; opacity: .9; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .section { padding: 56px 0; }
+        .sec-title { text-align: left; font-size: 1.4rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 18px; }
+        .lead { font-size: 1.05rem; color: #333; }
+
+        /* Blocks styled similar to the reference layout https://www.buddica.jp/company/ */
+        .block { border-top: 1px solid #e5e5e5; padding-top: 40px; margin-top: 40px; }
+        .kicker { display: inline-block; font-size: .8rem; letter-spacing: .18em; color: #888; text-transform: uppercase; margin-bottom: 8px; }
+        .h2 { font-size: 1.8rem; font-weight: 900; letter-spacing: .02em; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+        .values-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+        @media (max-width: 700px) { .values-list { grid-template-columns: 1fr; } }
+        .value { padding: 12px 14px; background: #fafafa; border: 1px solid #eee; font-weight: 700; }
+
+        .profile { background: #fafafa; border: 1px solid #eee; padding: 16px; }
+        .profile dl { display: grid; grid-template-columns: 180px 1fr; gap: 10px 22px; }
+        .profile dt { font-weight: 900; color: #444; }
+        .profile dd { color: #222; }
+        @media (max-width: 700px) { .profile dl { grid-template-columns: 1fr; } }
+
+        .footer { text-align: center; padding: 48px 0; color: #666; font-size: .9rem; border-top: 1px solid #eee; margin-top: 56px; }
+        .btn-back { display: inline-flex; align-items:center; gap:8px; margin-top: 28px; padding: 10px 18px; border:1px solid #111; color:#111; text-decoration:none; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+        .btn-back:hover { background:#111; color:#fff; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html"><img src="assets/logo.png" alt="LUMETRUST" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#works" class="nav-link">Works</a></li>
+                <li><a href="about.html" class="nav-link" aria-current="page">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="About">
+        <h1 class="page-title">About</h1>
+        <p style="opacity:.85; margin-top:10px; font-weight:600; letter-spacing:.08em;">映像で、心に残る体験を。</p>
+    </section>
+
+    <main class="container">
+        <!-- Mission -->
+        <section class="section block" id="mission">
+            <span class="kicker">Mission</span>
+            <h2 class="h2">新作を量産せず、心に残る一作を。</h2>
+            <p class="lead">作品は単なるコンテンツではなく、誰かの記憶に寄り添う体験です。節目の瞬間に立ち会い、視る人の心に残る一作を届けます。</p>
+        </section>
+
+        <!-- Vision -->
+        <section class="section block" id="vision">
+            <span class="kicker">Vision</span>
+            <h2 class="h2">映像を、人生最高のエンタメに。</h2>
+            <p class="lead">どこで観たかより、誰と観たか。映像を通じて共有される時間が、人生の思い出になる。その体験価値を最大化します。</p>
+        </section>
+
+        <!-- Values -->
+        <section class="section block" id="values">
+            <span class="kicker">Values</span>
+            <h2 class="h2">大切にしていること</h2>
+            <div class="values-list">
+                <div class="value">自分が源</div>
+                <div class="value">作品に魂を注ぐ</div>
+                <div class="value">現場から学ぶ</div>
+                <div class="value">期待を超える</div>
+                <div class="value">チームで創る</div>
+                <div class="value">理想に集中する</div>
+                <div class="value">結果で証明する</div>
+            </div>
+        </section>
+
+        <!-- Top Message -->
+        <section class="section block" id="message">
+            <span class="kicker">Top Message</span>
+            <div class="grid">
+                <div>
+                    <h2 class="h2">映像で、人の心を動かす。</h2>
+                    <p class="lead">情報が溢れる時代だからこそ、伝えるより“伝わる”ことにこだわります。短い尺でも、言葉少なくても、映像は本質を届けられる。わたしたちは、その力を信じています。</p>
+                </div>
+                <div>
+                    <img src="assets/profile.png" alt="Profile" style="width:100%;max-width:360px;display:block;margin:0 auto;border-radius:12px;">
+                </div>
+            </div>
+            <a class="btn-back" href="index.html#works"><i class="fa-solid fa-arrow-left"></i> Back to Works</a>
+        </section>
+
+        <!-- Company Profile -->
+        <section class="section block" id="company">
+            <span class="kicker">Profile</span>
+            <h2 class="h2">概要</h2>
+            <div class="profile" role="table">
+                <dl>
+                    <dt>屋号</dt><dd>小寺颯輝 ポートフォリオ</dd>
+                    <dt>所在地</dt><dd>兵庫県西宮市北口町19-3-203</dd>
+                    <dt>連絡先</dt><dd><a href="mailto:satu.mmys0227@gmail.com">satu.mmys0227@gmail.com</a> / <a href="tel:07090047068">070-9004-7068</a></dd>
+                    <dt>事業内容</dt><dd>映像企画・演出・撮影・編集 / YouTube映像制作 / ロゴ・モーショングラフィックス</dd>
+                </dl>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <small>&copy; 2024 小寺颯輝 映像作品ポートフォリオ</small>
+    </footer>
+</body>
+</html>
+
