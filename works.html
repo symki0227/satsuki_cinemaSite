@@ -55,7 +55,21 @@
     </section>
 
     <main class="container">
-        <div id="works-list" class="works-list"></div>
+        <div class="controls" style="display:grid;grid-template-columns:1fr auto auto auto;gap:12px;align-items:center;margin-top:24px;margin-bottom:8px">
+            <div style="position:relative">
+                <input id="q" type="search" placeholder="フリーワード検索" style="width:100%;height:38px;padding:0 12px;border:1px solid #ddd">
+            </div>
+            <select id="year" style="height:38px;border:1px solid #ddd;padding:0 10px;min-width:140px"></select>
+            <div id="cats" style="display:flex;gap:10px;flex-wrap:wrap">
+                <button data-cat="" class="cat-btn active" style="height:38px;padding:0 12px;border:1px solid #111;background:#111;color:#fff;font-weight:800">ALL</button>
+                <button data-cat="ショートフィルム" class="cat-btn" style="height:38px;padding:0 12px;border:1px solid #111;background:#fff;color:#111;font-weight:800">CM</button>
+                <button data-cat="アート" class="cat-btn" style="height:38px;padding:0 12px;border:1px solid #111;background:#fff;color:#111;font-weight:800">Film</button>
+                <button data-cat="ドキュメンタリー" class="cat-btn" style="height:38px;padding:0 12px;border:1px solid #111;background:#fff;color:#111;font-weight:800">Documentary</button>
+                <button data-cat="ミュージックビデオ" class="cat-btn" style="height:38px;padding:0 12px;border:1px solid #111;background:#fff;color:#111;font-weight:800">Music Video</button>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;font-weight:800"><input id="awarded" type="checkbox"> 受賞作品のみ</label>
+        </div>
+        <div id="works-grid" class="work-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:10px"></div>
     </main>
 
     <footer class="footer">
@@ -68,26 +82,59 @@
 
     // 簡易データ（index.htmlのSTATIC_WORKSと同じ構造を想定）
     const STATIC_WORKS = [
-        { title: '中央大学Youtubeオープニング', year: '2024', category: 'ショートフィルム', youtube: '@https://youtu.be/BpQ0BFcBTM4' },
-        { title: '作品B', year: '2023', category: 'ドキュメンタリー', youtube: '@https://youtu.be/BW0xPJkpFhQ' },
-        { title: '作品C', year: '2022', category: 'アート', youtube: '@https://youtu.be/g7QGcZAiXWo' },
-        { title: '作品D', year: '2022', category: 'ミュージックビデオ', youtube: '@https://youtu.be/0x4B5nB-jLc' }
+        { title: '中央大学Youtubeオープニング', year: '2024', category: 'ショートフィルム', youtube: '@https://youtu.be/BpQ0BFcBTM4', awarded: true },
+        { title: '作品B', year: '2023', category: 'ドキュメンタリー', youtube: '@https://youtu.be/BW0xPJkpFhQ', awarded: false },
+        { title: '作品C', year: '2022', category: 'アート', youtube: '@https://youtu.be/g7QGcZAiXWo', awarded: true },
+        { title: '作品D', year: '2022', category: 'ミュージックビデオ', youtube: '@https://youtu.be/0x4B5nB-jLc', awarded: false }
     ];
 
-    function renderList(works){
-        const list=document.getElementById('works-list');
-        list.innerHTML = works.map(w=>{
+    function thumbUrl(id){ return `https://img.youtube.com/vi/${id}/hqdefault.jpg`; }
+
+    function renderGrid(works){
+        const grid=document.getElementById('works-grid');
+        grid.innerHTML = works.map(w=>{
             const id=parseYouTubeId(w.youtube);
             const href=id?`https://youtu.be/${id}`:'#';
-            return `<a class="work-row" href="${href}" target="_blank" rel="noopener noreferrer">
-                        <div class="work-date">${w.year}</div>
-                        <div><span class="work-cat">${w.category}</span></div>
+            return `
+                <a href="${href}" target="_blank" rel="noopener" style="display:block;border:1px solid #eee;text-decoration:none;color:inherit">
+                    <div style="aspect-ratio:16/9;background:#f2f2f2;overflow:hidden"><img src="${thumbUrl(id)}" alt="${w.title}" style="width:100%;height:100%;object-fit:cover"></div>
+                    <div style="padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <span class="work-cat">${w.category}</span>
+                            ${w.awarded?'<span class="work-cat" title="Awarded" style="border:1px solid #999;color:#555">🏆</span>':''}
+                        </div>
                         <div class="work-title">${w.title}</div>
-                    </a>`;
+                        <div class="work-date">${w.year}</div>
+                    </div>
+                </a>`;
         }).join('');
     }
 
-    renderList(STATIC_WORKS);
+    function unique(arr){ return [...new Set(arr)]; }
+    function applyFilters(){
+        const q=document.getElementById('q').value.toLowerCase();
+        const year=document.getElementById('year').value;
+        const cat=document.querySelector('.cat-btn.active')?.getAttribute('data-cat')||'';
+        const onlyAward=document.getElementById('awarded').checked;
+        const filtered=STATIC_WORKS.filter(w=>{
+            const okQ=!q||w.title.toLowerCase().includes(q);
+            const okY=!year||w.year===year;
+            const okC=!cat||w.category===cat;
+            const okA=!onlyAward||w.awarded;
+            return okQ && okY && okC && okA;
+        });
+        renderGrid(filtered);
+    }
+
+    (function init(){
+        const yearSel=document.getElementById('year');
+        yearSel.innerHTML='<option value="">年を選択</option>'+unique(STATIC_WORKS.map(w=>w.year)).sort((a,b)=>b.localeCompare(a)).map(y=>`<option value="${y}">${y}</option>`).join('');
+        document.getElementById('q').addEventListener('input', applyFilters);
+        document.getElementById('year').addEventListener('change', applyFilters);
+        document.getElementById('awarded').addEventListener('change', applyFilters);
+        document.querySelectorAll('.cat-btn').forEach(btn=>btn.addEventListener('click',e=>{document.querySelectorAll('.cat-btn').forEach(b=>{b.classList.remove('active');b.style.background='#fff';b.style.color='#111';}); e.currentTarget.classList.add('active'); e.currentTarget.style.background='#111'; e.currentTarget.style.color='#fff'; applyFilters();}));
+        renderGrid(STATIC_WORKS);
+    })();
     </script>
 </body>
 </html>
