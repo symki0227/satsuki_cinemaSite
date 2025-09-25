@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SERVICES - 小寺颯輝 | 映像制作サービス</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;color:#111;background:#fff;line-height:1.8}
+        .header{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(10px)}
+        .nav{display:flex;align-items:center;width:100%;padding:10px 32px 10px 0}
+        .nav-brand{display:flex;align-items:center}
+        .nav-logo{height:40px;width:auto}
+        .nav-menu{margin-left:auto;display:flex;gap:24px;list-style:none}
+        .nav-link{color:#fff;text-decoration:none;font-weight:800}
+        .nav-link:hover{color:#e91e63}
+
+        .hero{background:#111;color:#fff;padding:64px 0;text-align:center}
+        .page-title{font-size:2.2rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+        .page-title::after{content:'';display:block;width:90px;height:2px;margin:14px auto 0;background:#fff;opacity:.9}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* サービス詳細 */
+        .services-detail{margin-top:28px}
+        .service-intro{text-align:center;margin-bottom:48px;padding:32px;background:#f8f9fa;border-radius:12px}
+        .service-intro h2{font-size:1.8rem;font-weight:900;color:#333;margin-bottom:16px}
+        .service-intro p{font-size:1.1rem;color:#666;line-height:1.7;max-width:800px;margin:0 auto}
+
+        .service-section{margin:48px 0;padding:32px;background:#fff;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
+        .service-section h3{font-size:1.5rem;font-weight:800;color:#333;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+        .service-section h3 i{color:#e91e63;font-size:1.2rem}
+        .service-section p{color:#666;line-height:1.7;margin-bottom:16px}
+        .service-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:24px}
+        .feature-item{padding:20px;background:#f8f9fa;border-radius:8px;border-left:4px solid #e91e63}
+        .feature-item h4{font-weight:800;color:#333;margin-bottom:8px}
+        .feature-item p{color:#666;font-size:0.95rem;line-height:1.6}
+
+        .pricing-section{background:linear-gradient(135deg,#e91e63,#f06292);color:#fff;padding:48px;border-radius:12px;text-align:center;margin:48px 0}
+        .pricing-section h3{font-size:1.8rem;font-weight:900;margin-bottom:16px}
+        .pricing-section p{font-size:1.1rem;opacity:0.9;margin-bottom:24px}
+        .contact-cta{display:inline-block;background:#fff;color:#e91e63;padding:16px 32px;border-radius:8px;text-decoration:none;font-weight:800;transition:transform 0.3s ease}
+        .contact-cta:hover{transform:translateY(-2px)}
+
+        .footer{text-align:center;padding:48px 0;color:#666;font-size:.9rem;border-top:1px solid #eee;margin-top:56px}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html"><img src="assets/logo.png" alt="LUMETRUST" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="works.html" class="nav-link">Works</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="services.html" class="nav-link" aria-current="page">Services</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="Services">
+        <h1 class="page-title">Services</h1>
+        <p style="opacity:.85; margin-top:10px; font-weight:600; letter-spacing:.08em;">映像制作のプロフェッショナルサービス</p>
+    </section>
+
+    <main class="container">
+        <div class="services-detail">
+            <div class="service-intro">
+                <h2>映像制作における豊富な経験と技術力</h2>
+                <p>映像制作に情熱を注ぐクリエイターとして、様々なジャンルの作品を手がけてきました。<br>
+                クライアントの想いを映像に込め、最高の作品をお届けすることをお約束します。</p>
+            </div>
+
+            <div class="service-section">
+                <h3><i class="fas fa-video"></i>映像制作</h3>
+                <p>ショートフィルム、ドキュメンタリー、ミュージックビデオなど、様々なジャンルの映像作品を企画から制作まで一貫して手がけます。クライアントのビジョンを実現するため、最適な表現手法を提案いたします。</p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <h4>企画・構成</h4>
+                        <p>コンセプト設計から脚本、構成まで、作品の方向性を決定します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>撮影監督</h4>
+                        <p>高品質な映像を実現するため、撮影技術と演出を統合します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>ポストプロダクション</h4>
+                        <p>編集、色彩補正、音響設計まで、完成度の高い作品に仕上げます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-section">
+                <h3><i class="fas fa-camera"></i>撮影・編集</h3>
+                <p>高品質な撮影技術とクリエイティブな編集で、クライアントの想いを映像に込めます。最新の機材と技術を駆使し、4K対応、色彩補正まで対応可能です。</p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <h4>4K撮影対応</h4>
+                        <p>最新の4K機材を使用し、高解像度での撮影を実現します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>色彩補正</h4>
+                        <p>プロフェッショナルな色彩補正で、作品の印象を決定づけます。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>音響設計</h4>
+                        <p>映像に最適な音響効果を設計し、作品の完成度を高めます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-section">
+                <h3><i class="fas fa-palette"></i>クリエイティブディレクション</h3>
+                <p>映像のコンセプト設計から演出まで、作品の方向性を決定し、クライアントのビジョンを実現します。ブランドイメージに合った表現手法を提案いたします。</p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <h4>ブランド戦略</h4>
+                        <p>クライアントのブランドイメージに合った映像戦略を立案します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>アートディレクション</h4>
+                        <p>視覚的な統一感を保ちながら、印象的な映像表現を実現します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>演出指導</h4>
+                        <p>俳優やスタッフへの演出指導により、想定通りの映像を制作します。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-section">
+                <h3><i class="fas fa-users"></i>チーム制作</h3>
+                <p>プロデューサー、カメラマン、編集者など、必要なスタッフをコーディネートし、大規模な制作プロジェクトにも対応します。経験豊富なスタッフとの連携により、高品質な作品を制作いたします。</p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <h4>スタッフコーディネート</h4>
+                        <p>プロジェクトに最適なスタッフを選定し、チーム編成を行います。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>プロジェクト管理</h4>
+                        <p>制作スケジュールの管理から品質管理まで、プロジェクト全体を統括します。</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>大規模制作対応</h4>
+                        <p>映画やテレビ番組など、大規模な制作プロジェクトにも対応可能です。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-section">
+                <h3>お見積もり・ご相談</h3>
+                <p>プロジェクトの規模や内容に応じて、最適なプランをご提案いたします。</p>
+                <a href="index.html#contact" class="contact-cta">お問い合わせはこちら</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <small>&copy; 2024 小寺颯輝 映像作品ポートフォリオ</small>
+    </footer>
+</body>
+</html>
