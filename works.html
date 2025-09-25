@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKS - 小寺颯輝 | 映像作品ポートフォリオ</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Noto Sans JP',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial,sans-serif;color:#111;background:#fff;line-height:1.8}
+        .header{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(10px)}
+        .nav{display:flex;align-items:center;width:100%;padding:10px 32px 10px 0}
+        .nav-brand{display:flex;align-items:center}
+        .nav-logo{height:40px;width:auto}
+        .nav-menu{margin-left:auto;display:flex;gap:24px;list-style:none}
+        .nav-link{color:#fff;text-decoration:none;font-weight:800}
+        .nav-link:hover{color:#e91e63}
+
+        .hero{background:#111;color:#fff;padding:64px 0;text-align:center}
+        .page-title{font-size:2.2rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}
+        .page-title::after{content:'';display:block;width:90px;height:2px;margin:14px auto 0;background:#fff;opacity:.9}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* AOI Pro. WORK風 リスト */
+        .works-list{margin-top:28px;border-top:1px solid #e5e5e5}
+        .work-row{display:grid;grid-template-columns:110px 140px 1fr;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid #eee;text-decoration:none;color:inherit}
+        .work-row:hover .work-title{text-decoration:underline}
+        .work-date{font-size:.85rem;color:#666;letter-spacing:.06em}
+        .work-cat{display:inline-block;font-size:.75rem;letter-spacing:.12em;color:#111;padding:6px 10px;border:1px solid #111;font-weight:800;text-transform:uppercase}
+        .work-title{font-size:1rem;font-weight:800;letter-spacing:.02em}
+
+        .footer{ text-align:center; padding:48px 0; color:#666; font-size:.9rem; border-top:1px solid #eee; margin-top:56px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="index.html"><img src="assets/logo.png" alt="LUMETRUST" class="nav-logo"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="works.html" class="nav-link" aria-current="page">Works</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="Works">
+        <h1 class="page-title">Works</h1>
+        <p style="opacity:.85; margin-top:10px; font-weight:600; letter-spacing:.08em;">受賞・掲載作含む、主要作品リスト</p>
+    </section>
+
+    <main class="container">
+        <div id="works-list" class="works-list"></div>
+    </main>
+
+    <footer class="footer">
+        <small>&copy; 2024 小寺颯輝 映像作品ポートフォリオ</small>
+    </footer>
+
+    <script>
+    // index.html と同じパーサ
+    function parseYouTubeId(raw){ if(!raw) return ''; const s=String(raw).trim().replace(/^@+/, ''); try{ const u=new URL(s,'https://www.youtube.com'); const host=u.hostname.replace('www.',''); if(host==='youtu.be') return u.pathname.replace(/^\//,'').split('/')[0]||''; if(host.endsWith('youtube.com')){ if(u.pathname==='/watch') return u.searchParams.get('v')||''; if(u.pathname.startsWith('/shorts/')) return u.pathname.split('/shorts/')[1].split('/')[0]||''; if(u.pathname.startsWith('/embed/')) return u.pathname.split('/embed/')[1].split('/')[0]||''; } }catch(_){} const m=s.match(/([A-Za-z0-9_-]{11})/); return m?m[1]:''; }
+
+    // 簡易データ（index.htmlのSTATIC_WORKSと同じ構造を想定）
+    const STATIC_WORKS = [
+        { title: '中央大学Youtubeオープニング', year: '2024', category: 'ショートフィルム', youtube: '@https://youtu.be/BpQ0BFcBTM4' },
+        { title: '作品B', year: '2023', category: 'ドキュメンタリー', youtube: '@https://youtu.be/BW0xPJkpFhQ' },
+        { title: '作品C', year: '2022', category: 'アート', youtube: '@https://youtu.be/g7QGcZAiXWo' },
+        { title: '作品D', year: '2022', category: 'ミュージックビデオ', youtube: '@https://youtu.be/0x4B5nB-jLc' }
+    ];
+
+    function renderList(works){
+        const list=document.getElementById('works-list');
+        list.innerHTML = works.map(w=>{
+            const id=parseYouTubeId(w.youtube);
+            const href=id?`https://youtu.be/${id}`:'#';
+            return `<a class="work-row" href="${href}" target="_blank" rel="noopener noreferrer">
+                        <div class="work-date">${w.year}</div>
+                        <div><span class="work-cat">${w.category}</span></div>
+                        <div class="work-title">${w.title}</div>
+                    </a>`;
+        }).join('');
+    }
+
+    renderList(STATIC_WORKS);
+    </script>
+</body>
+</html>
+
+
