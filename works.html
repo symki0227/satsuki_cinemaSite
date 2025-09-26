@@ -32,6 +32,64 @@
         .work-title{font-size:1rem;font-weight:800;letter-spacing:.02em}
 
         .footer{ text-align:center; padding:48px 0; color:#666; font-size:.9rem; border-top:1px solid #eee; margin-top:56px; }
+
+        /* スマホ用レスポンシブ */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .controls {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+
+            .controls > div:not(:first-child) {
+                width: 100%;
+            }
+
+            #cats {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .cat-btn {
+                flex: 1;
+                min-width: 80px;
+                font-size: 0.8rem;
+            }
+
+            .works-list {
+                margin-top: 20px;
+            }
+
+            .work-row {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+                padding: 16px 0 !important;
+                text-align: left;
+            }
+
+            .work-date {
+                order: 1;
+                font-size: 0.8rem;
+                margin-bottom: 8px;
+            }
+
+            .work-cat {
+                order: 2;
+                display: inline-block;
+                margin-bottom: 8px;
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+
+            .work-title {
+                order: 3;
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+        }
     </style>
 </head>
 <body>
