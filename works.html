@@ -93,6 +93,41 @@
             .work-grid {
                 grid-template-columns: 1fr !important;
             }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* ハンバーガーメニュー */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
     </style>
 </head>
@@ -102,12 +137,17 @@
             <div class="nav-brand">
                 <a href="index.html"><img src="assets/logo.png" alt="LUMETRUST" class="nav-logo"></a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html#home" class="nav-link">Home</a></li>
-                <li><a href="works.html" class="nav-link" aria-current="page">Works</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link" onclick="closeMenu()">Home</a></li>
+                <li><a href="works.html" class="nav-link" aria-current="page" onclick="closeMenu()">Works</a></li>
+                <li><a href="services.html" class="nav-link" onclick="closeMenu()">Services</a></li>
+                <li><a href="about.html" class="nav-link" onclick="closeMenu()">About</a></li>
+                <li><a href="index.html#contact" class="nav-link" onclick="closeMenu()">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -138,6 +178,23 @@
     <footer class="footer">
         <small>&copy; 2024 小寺颯輝 映像作品ポートフォリオ</small>
     </footer>
+
+    <script>
+        // ハンバーガーメニューの制御
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    </script>
 
     <script>
     // index.html と同じパーサ
